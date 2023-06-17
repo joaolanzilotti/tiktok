@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import "./video.css";
 import VideoFooter from "./components/footer/VideoFooter";
+import VideoSideBar from "./components/sidebar/VideoSideBar";
 
 function Video() {
 
@@ -26,10 +27,10 @@ function Video() {
             <video ref={videoRef} 
             onClick={handdleStart} 
             loop 
-            src='https://media.istockphoto.com/id/1385148464/pt/v%C3%ADdeo/cute-ginger-cat-with-glasses-sitting-in-a-box-on-a-yellow-background-in-neon-light.mp4?s=mp4-640x640-is&k=20&c=UG8HHhPcPU_UED_yAh7EU6fAYj9tkLjPs1DajcV--vQ=' className="video__player">
+            src='https://firebasestorage.googleapis.com/v0/b/jornada-dev.appspot.com/o/brecker2.mp4?alt=media&token=b5399418-9276-4e53-a706-1e00290c2c74' className="video__player">
                 
             </video>
-            {/* Side Bar */}
+            <VideoSideBar/>
             <VideoFooter/>
         </div>
     )
