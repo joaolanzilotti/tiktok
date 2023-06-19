@@ -1,16 +1,32 @@
-
+import React, { useEffect, useState } from "react";
 import './App.css';
 import Video from './pages/Video';
+import db from './config/firebase';
+import { collection, getDocs } from 'firebase/firestore/lite'
 
 function App() {
+
+    const [video, setVideos] = useState([]);
+
+    async function getVideos(){
+        const videosCollection = collection(db, "videos");
+        const videosSnapshot = await getDocs(videosCollection);
+        const videosList = videosSnapshot.docs.map(doc => doc.data());
+        setVideos(videosList);
+    }
+
+    useEffect(() => {
+        getVideos().then();
+    }, [])
+
   return (
     <div className="App">
      <div className='app__videos'>
-        <Video likes={25} messages={200} shares={300} name="Joao Pedro" description="Brecker o goleiro" music="Musica Epica" url="https://firebasestorage.googleapis.com/v0/b/jornada-dev.appspot.com/o/brecker2.mp4?alt=media&token=b5399418-9276-4e53-a706-1e00290c2c74"/>
-         <Video likes={65} messages={200} shares={300}  name="Paulo" description="Brecker o goleiro" music="Musica Epica" url="https://firebasestorage.googleapis.com/v0/b/jornada-dev.appspot.com/o/bird.mp4?alt=media&token=52abbeec-ff95-4acb-808e-5a4b977d1da"/>
-         <Video likes={656} messages={200} shares={300}  name="Paulo" description="Brecker o goleiro" music="Musica Epica" url="https://firebasestorage.googleapis.com/v0/b/jornada-dev.appspot.com/o/brecker2.mp4?alt=media&token=b5399418-9276-4e53-a706-1e00290c2c74"/>
-         <Video likes={12000} messages={200} shares={300}  name="Paulo" description="Brecker o goleiro" music="Musica Epica" url="https://firebasestorage.googleapis.com/v0/b/jornada-dev.appspot.com/o/brecker2.mp4?alt=media&token=b5399418-9276-4e53-a706-1e00290c2c74"/>
-
+         { video.map((item) => {
+             return(
+                 <Video likes={item.likes} messages={item.messages} shares={item.shares}  name={item.name} description={item.description} music={item.music} url={item.url}/>
+             )
+         }) }
      </div>
     </div>
   );
