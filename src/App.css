@@ -10,10 +10,10 @@ html{
 }
 
 .app__videos {
-  height: 95vh; 
-  max-height: 800px; 
-  width: 80%; 
-  max-width: 500px; 
+  height: 95vh;
+  max-height: 800px;
+  width: 80%;
+  max-width: 400px;
   border: 1px solid black; 
   border-radius: 20px;
   overflow: scroll;
@@ -29,4 +29,11 @@ html{
 .app__videos {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@media only screen and (max-width: 440px){
+  .app__videos{
+    width: 100%;
+    height: 100vh;
+  }
 }
